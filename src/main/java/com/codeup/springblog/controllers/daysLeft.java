@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -8,15 +9,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class daysLeft {
     @GetMapping("/deimos")
-    @ResponseBody
-    public String daysLeft(){
-        return "31 days left";
+    public String days(){
+        return "days";
     }
 
     @GetMapping("/deimos/{days}")
-    @ResponseBody
-    public String hello(@PathVariable String days) {
-        return "There are " + days + " left";
+    public String hello(@PathVariable String days, Model model) {
+        model.addAttribute("days", days);
+        return "days";
     }
 
     @GetMapping("/")
