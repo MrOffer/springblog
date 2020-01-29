@@ -5,7 +5,9 @@
     <title>Viewing Post</title>
 </head>
 <body>
-<h1 th:text="${title}"></h1>
-<p th:text="${body}"></p>
+<div>
+    <h3 th:text="${posts.title}"></h3>
+    <p th:text="${posts.body}"></p>
+</div>
 </body>
 </html>
