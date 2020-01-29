@@ -56,7 +56,7 @@ public class PostController {
     }
 
     @PostMapping("/post/edit/")
-    private String edit(@ModelAttribute Post post) {
+    private String updatePost(@ModelAttribute Post post) {
         postDao.save(post);
         return "redirect:/posts";
     }

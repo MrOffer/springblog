@@ -11,9 +11,11 @@
 
 <form th:action="@{/post/edit/}" th:method="post" th:object="${post}">
     <input th:field="*{id}" type="hidden" name="id" th:value="*{id}" />
-    <input th:field="*{title}" type="text" th:placeholder="*{title}" />
-    <input th:field="*{body}" type="text" th:placeholder="*{body}" />
-    <button type="submit">Confirm Changes</button>
+    <label for="title">Title</label>
+    <input id="title" th:field="*{title}" type="text" th:placeholder="*{title}" />
+    <label for="body">Body</label>
+    <textarea id="body" th:field="*{body}" type="text" th:placeholder="*{body}"> </textarea>
+    <button type="submit">Update Post</button>
 </form>
 
 </body>
