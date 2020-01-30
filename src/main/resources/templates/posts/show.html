@@ -9,5 +9,18 @@
     <h3 th:text="${posts.title}"></h3>
     <p th:text="${posts.body}"></p>
 </div>
+<div>
+    <ul>
+        <li style="list-style-type: none" th:each="image : ${posts.images}">
+            <img  th:src= "${image.path}" alt=" cats " style="height: 100px; width: 150px">
+        </li>
+    </ul>
+</div>
+
+    <form method="post">
+        <label for="imagePath">Add an Image to this post</label>
+        <input id="imagePath" type="text" placeholder="Url">
+        <button type="submit">Add Image</button>
+    </form>
 </body>
 </html>

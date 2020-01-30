@@ -1,14 +1,12 @@
 
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="head">
     <meta charset="UTF-8"/>
     <title>Edit</title>
 
 </head>
 <body>
-
-
 <form th:action="@{/post/edit/}" th:method="post" th:object="${post}">
     <input th:field="*{id}" type="hidden" name="id" th:value="*{id}" />
     <label for="title">Title</label>
