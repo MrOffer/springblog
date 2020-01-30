@@ -8,6 +8,9 @@
 <div>
     <h3 th:text="${posts.title}"></h3>
     <p th:text="${posts.body}"></p>
+    <div th:each="user : ${posts.user}">
+        <p th:text="${user.email}"></p>
+    </div>
 </div>
 </body>
 </html>
