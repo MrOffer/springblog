@@ -17,7 +17,7 @@
     </ul>
 </div>
 
-    <form method="post">
+    <form  th:action="@{'/posts/' + ${posts.id} + '/add-image'}" th:method="post">
         <label for="imagePath">Add an Image to this post</label>
         <input id="imagePath" type="text" placeholder="Url">
         <button type="submit">Add Image</button>
