@@ -1,13 +1,18 @@
 package com.codeup.springblog.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @Controller
 public class HomeController {
 
-    @GetMapping("/home")
-    public String welcome() {
+    @GetMapping("/home/{user}")
+
+    public String homePage(@PathVariable String user, Model model){
+        model.addAttribute("user",user);
         return "home";
     }
 }

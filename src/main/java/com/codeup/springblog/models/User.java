@@ -1,58 +1,35 @@
 package com.codeup.springblog.models;
 
+
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="user")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
-
-    public User(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
-    public User(User copy){
-        id = copy.id;
-        username = copy.username;
-        email = copy.email;
-        password = copy.password;
-    }
-
-
 
     public User() {
     }
 
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setUsers(List<Post> posts) {
-        this.posts = posts;
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -64,6 +41,14 @@ public class User {
         this.username = username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -72,11 +57,11 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Post> getPosts() {
+        return posts;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

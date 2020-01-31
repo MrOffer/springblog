@@ -1,64 +1,80 @@
 package com.codeup.springblog.controllers;
 
+
+
 import com.codeup.springblog.models.Post;
-import com.codeup.springblog.repositories.postRepository;
+import com.codeup.springblog.models.User;
+import com.codeup.springblog.repositories.UserRepository;
+import com.codeup.springblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
 public class PostController {
 
-    private postRepository postDao;
+    private PostRepository postDao;
+    private UserRepository userDao;
 
-    public PostController(postRepository postDao) {
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/posts")
-    public String postsIndex(Model model) {
+    public String postsIndex(Model model){
         model.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
 
-    @GetMapping(path = "/posts/{id}")
-    public String Post(@PathVariable Long id, Model model) {
-        model.addAttribute("posts", postDao.getOne(id));
-        return "/posts/show";
-    }
-
-    @GetMapping("/posts/create")
-    @ResponseBody
-    public void createPost() {
-        Post post = new Post();
-        post.setTitle("Title 3");
-        post.setBody("this is the body of the 3rd post");
-        postDao.save(post);
-    }
-
-    @PostMapping("/posts/create")
-    @ResponseBody
-    public String created() {
-        return "create a new post";
-    }
-
-    @RequestMapping(path = "posts/delete/{id}")
-    public String deletePost(@PathVariable Long id) {
-        postDao.deleteById(id);
-        return "redirect:/posts";
-    }
-
-    @RequestMapping(path = "/posts/edit/{id}")
-    public String editPost(@PathVariable Long id, Model model) {
+    @GetMapping("/posts/{id}/edit")
+    public String viewEditPostForm(@PathVariable long id, Model model) {
         model.addAttribute("post", postDao.getOne(id));
         return "posts/edit";
     }
 
-    @PostMapping("/post/edit/")
-    private String updatePost(@ModelAttribute Post post) {
-        postDao.save(post);
+    @PostMapping("/posts/{id}/edit")
+    public String updatePost(@PathVariable long id, @RequestParam String title, @RequestParam String body) {
+        Post p = new Post(
+                id,
+                title,
+                body
+        );
+        postDao.save(p);
         return "redirect:/posts";
+    }
+
+    @PostMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable long id) {
+        System.out.println("Does this run?");
+        postDao.deleteById(id);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/posts/{id}")
+    public String viewPost(@PathVariable long id, Model model){
+        model.addAttribute("post", postDao.getOne(id));
+        return "posts/show";
+    }
+
+    @GetMapping("/posts/create")
+    public String createPostForm(){
+        return "posts/create";
+    }
+
+    @PostMapping("/posts/create")
+    public String submitPost(
+            @RequestParam String title,
+            @RequestParam String body
+    ){
+        Post post = new Post(title, body);
+        User user = userDao.getOne(1L);
+
+        post.setUser(user);
+
+        postDao.save(post);
+
+        return "redirect:/posts/" + post.getId();
     }
 
 }
