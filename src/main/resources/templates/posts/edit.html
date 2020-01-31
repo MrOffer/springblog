@@ -9,7 +9,7 @@
 <body>
 
 
-<form th:action="@{/post/edit/}" th:method="post" th:object="${post}">
+<form th:action="@{/posts/edit}" th:method="post" th:object="${post}">
     <input th:field="*{id}" type="hidden" name="id" th:value="*{id}" />
     <label for="title">Title</label>
     <input id="title" th:field="*{title}" type="text" th:placeholder="*{title}" />
