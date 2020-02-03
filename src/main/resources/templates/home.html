@@ -2,11 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Home</title>
+    <title>Spring Blog!</title>
+    <th:block th:replace="partials/bootstrap_style :: stylesheets">
+
+    </th:block>
+
 </head>
 <body>
+<th:block th:replace="partials/bootstrap_style :: navbar">
+
+</th:block>
 
 <h1>This is the home page</h1>
+<th:block th:replace="partials/bootstrap_style :: scripts">
 
+</th:block>
 </body>
 </html>
