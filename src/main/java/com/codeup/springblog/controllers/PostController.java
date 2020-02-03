@@ -7,6 +7,7 @@ import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class PostController {
 
     @PostMapping("/posts/edit")
     private String edit(@ModelAttribute Post post) {
-        User user = userDao.getOne(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         post.setUser(user);
         postDao.save(post);
@@ -47,7 +48,6 @@ public class PostController {
     }
     @PostMapping("/posts/{id}/delete")
     public String deletePost(@PathVariable long id) {
-        System.out.println("Does this run?");
         postDao.deleteById(id);
         return "redirect:/posts";
     }
@@ -67,7 +67,7 @@ public class PostController {
     @PostMapping("/posts/create")
     public String submitPost(@ModelAttribute Post post){
 
-        User user = userDao.getOne(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         post.setUser(user);
 
