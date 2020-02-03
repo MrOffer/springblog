@@ -3,11 +3,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Edit</title>
+    <title>Editing <span th:text="${post.title}"></span></title>
 
+    <th:block th:replace="partials/bootstrap_style :: stylesheets">
+
+    </th:block>
 </head>
 <body>
+<th:block th:replace="partials/bootstrap_style :: navbar">
 
+</th:block>
 
 <form th:action="@{/posts/edit}" th:method="post" th:object="${post}">
     <input th:field="*{id}" type="hidden" name="id" th:value="*{id}" />
@@ -17,5 +22,8 @@
     <textarea id="body" th:field="*{body}" type="text" th:placeholder="*{body}"> </textarea>
     <button type="submit">Update Post</button>
 </form>
+<th:block th:replace="partials/bootstrap_style :: scripts">
+
+</th:block>
 </body>
 </html>

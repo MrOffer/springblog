@@ -2,9 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <th:block th:replace="partials/bootstrap_style :: stylesheets">
+
+    </th:block>
     <title>Create a Post</title>
 </head>
 <body>
+<th:block th:replace="partials/bootstrap_style :: navbar">
+
+</th:block>
     <h1>Create Post</h1>
     <form th:action="@{/posts/create}" th:object="${post}" th:method="POST">
         <label for="title">Title</label>
@@ -13,5 +19,8 @@
         <textarea id="body" name="body" placeholder="Enter body"></textarea>
         <button>Create Post</button>
     </form>
+<th:block th:replace="partials/bootstrap_style :: scripts">
+
+</th:block>
 </body>
 </html>

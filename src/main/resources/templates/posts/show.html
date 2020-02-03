@@ -2,9 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Viewing Post</title>
-</head>
+    <title>Viewing  <span th:text="${post.title}"></span></title>
+    <th:block th:replace="partials/bootstrap_style :: stylesheets">
+
+    </th:block>
+
 <body>
+<th:block th:replace="partials/bootstrap_style :: navbar">
+
+</th:block>
+
 <div>
     <span th:text="${post.title}"></span>
     posted by <span th:text="${post.user.email}"></span>
@@ -12,5 +19,8 @@
     <p th:text="${post.body}"></p>
     <p>Created by user with id <span th:text="${post.user.id}"></span></p>
 </div>
+<th:block th:replace="partials/bootstrap_style :: scripts">
+
+</th:block>
 </body>
 </html>
