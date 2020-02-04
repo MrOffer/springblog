@@ -41,19 +41,25 @@ public class PostController {
     @PostMapping("/posts/edit")
     private String edit(@ModelAttribute Post post) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         post.setUser(user);
         postDao.save(post);
         return "redirect:/posts";
     }
-    @PostMapping("/posts/{id}/delete")
-    public String deletePost(@PathVariable long id) {
+
+    @RequestMapping(path = "/posts/delete/{id}")
+    public String delete( @PathVariable Long id, Model model){
+    model.addAttribute("post", postDao.getOne(id));
+    return "posts/delete";
+    }
+
+    @PostMapping("/posts/delete/{id}")
+    public String deletePost(@PathVariable Long id) {
         postDao.deleteById(id);
         return "redirect:/posts";
     }
 
     @GetMapping("/posts/{id}")
-    public String viewPost(@PathVariable long id, Model model){
+    public String viewPost(@PathVariable Long id, Model model){
         model.addAttribute("post", postDao.getOne(id));
         return "posts/show";
     }

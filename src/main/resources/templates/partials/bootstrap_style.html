@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -10,31 +10,32 @@
 </head>
 <body>
 <th:block th:fragment="navbar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
         <a class="navbar-brand" href="/">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <li class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/posts">Posts<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/sign-up">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item">
+                <li class="nav-item active" sec:authorize="isAuthenticated()" >
                     <a class="nav-link" href="/posts/create">Create</a>
                 </li>
-                <form th:action="@{/logout}" th:method="post">
-                    <li class="nav-item">
-                        <button class="btn-link float-right btn">Logout</button>
+
+                <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                        <button sec:authorize="isAuthenticated()" class="btn-link float-right btn">Logout</button>
                     </li>
                 </form>
+                <li sec:authorize="not isAuthenticated()" class="nav-item active">
+                    <a class="nav-link" href="/sign-up">Register</a>
+                </li>
+                <li sec:authorize="not isAuthenticated()" class="nav-item active">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
             </ul>
         </div>
     </nav>

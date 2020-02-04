@@ -11,18 +11,30 @@
 <th:block th:replace="partials/bootstrap_style :: navbar">
 
 </th:block>
-<h1>Create an account</h1>
+<h1 style="text-align: center">Create an account</h1>
 <form th:action="@{/sign-up}" method="POST" th:object="${user}">
-    <label for="username">Username</label>
-    <input id="username" th:field="*{username}" />
 
-    <label for="email">Email</label>
-    <input id="email" th:field="*{email}" />
+    <div class="card text-white bg-info m-5 text-center">
+        <div class="card-header">
+            Please Register
+        </div>
+        <div class="card-body">
+            <label for="username">Username</label>
+            <input id="username" th:field="*{username}" />
+            <br>
+            <label for="email">&emsp;&emsp;Email</label>
+            <input id="email" th:field="*{email}" />
+            <br>
+            <label for="password">Password</label>
+            <input id="password" type="password" th:field="*{password}" />
+        </div>
+        <div class="card-footer">
+            <input value="Sign me up!" type="submit" />
+        </div>
+    </div>
 
-    <label for="password">Password</label>
-    <input id="password" type="password" th:field="*{password}" />
 
-    <input value="Sign me up!" type="submit" />
+
 </form>
 <th:block th:replace="partials/bootstrap_style :: scripts">
 

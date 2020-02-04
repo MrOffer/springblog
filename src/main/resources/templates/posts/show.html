@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Viewing  <span th:text="${post.title}"></span></title>
@@ -11,14 +11,21 @@
 <th:block th:replace="partials/bootstrap_style :: navbar">
 
 </th:block>
-
-<div>
-    <span th:text="${post.title}"></span>
-    posted by <span th:text="${post.user.email}"></span>
-    </h1>
-    <p th:text="${post.body}"></p>
-    <p>Created by user with id <span th:text="${post.user.id}"></span></p>
+<h1 style="text-align: center">Spring Blog Post</h1>
+<div class="card text-white bg-info m-5 text-center">
+    <div class="card-header">
+        <span th:text="${post.title}"></span>
+    </div>
+    <div class="card-body">
+        <p class="card-text" th:text="${post.body}"></p>
+        <a sec:authorize="isAuthenticated()" th:href="@{'/posts/edit/' + ${post.id}}" class="btn btn-active">Edit Post</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{'/posts/delete/' + ${post.id}}" class="btn btn-active">Delete Post</a>
+    </div>
+    <div class="card-footer text-muted">
+        Created by <span th:text="${post.user.email}"></span>
+    </div>
 </div>
+
 <th:block th:replace="partials/bootstrap_style :: scripts">
 
 </th:block>

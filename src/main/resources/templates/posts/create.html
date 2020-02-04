@@ -5,16 +5,16 @@
     <th:block th:replace="partials/bootstrap_style :: stylesheets">
 
     </th:block>
-    <title>Create a Post</title>
+    <title>Create A Post</title>
 </head>
 <body>
 <th:block th:replace="partials/bootstrap_style :: navbar">
 
 </th:block>
-    <h1>Create Post</h1>
+    <h1>Create A Post</h1>
     <form th:action="@{/posts/create}" th:object="${post}" th:method="POST">
         <label for="title">Title</label>
-        <input th:field="*{title}" id="title" type="text" name="title" placeholder="Enter title">
+        <input th:field="*{title}" id="title" type="text" placeholder="Enter title">
         <label th:field="*{body}" for="body">Body</label>
         <textarea id="body" name="body" placeholder="Enter body"></textarea>
         <button>Create Post</button>
