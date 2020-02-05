@@ -97,7 +97,7 @@ public class PostIntegrationTest {
     }
 
     @Test
-    public void testCreateAndDeleteAd() throws Exception {
+    public void testCreatePost() throws Exception {
         // Creates a test Ad to be deleted
         this.mvc.perform(
                 post("/posts/create").with(csrf())
@@ -105,11 +105,11 @@ public class PostIntegrationTest {
                         .param("title", "post to be deleted")
                         .param("body", "won't last long"))
                 .andExpect(status().is3xxRedirection());
-        Post existingPost = postsDao.findByTitle("ad to be deleted");
+        Post existingPost = postsDao.findByTitle("post to be deleted");
 
-        // Makes a Post request to /ads/{id}/delete and expect a redirection to the Ads index
+    // tests delete functionality by dleteing the post made above.
         this.mvc.perform(
-                post("/ads/" + existingPost.getId() + "/delete").with(csrf())
+                post("/posts/delete/" + existingPost.getId()).with(csrf())
                         .session((MockHttpSession) httpSession)
                         .param("id", String.valueOf(existingPost.getId())))
                 .andExpect(status().is3xxRedirection());
