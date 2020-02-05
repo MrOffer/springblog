@@ -107,7 +107,7 @@ public class PostIntegrationTest {
                 .andExpect(status().is3xxRedirection());
         Post existingPost = postsDao.findByTitle("post to be deleted");
 
-    // tests delete functionality by dleteing the post made above.
+    // tests delete functionality by deleting the post made above.
         this.mvc.perform(
                 post("/posts/delete/" + existingPost.getId()).with(csrf())
                         .session((MockHttpSession) httpSession)
