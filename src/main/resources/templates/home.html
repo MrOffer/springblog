@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8" />
     <title>Spring Blog!</title>
@@ -14,6 +14,20 @@
 </th:block>
 
 <h1 style="text-align: center" class="m-3">Welcome to the Blog Poster!</h1>
+<h1 style="text-align: center">Spring Blog Posts</h1>
+<div class="card-deck m-4">
+    <div th:each="post : ${posts}" class="card text-center text-white bg-info " style="width: 18rem;">
+        <div class="card-body">
+            <h5 th:text="${post.title}" class="card-header"></h5>
+            <p th:text="${post.body}" class="card-text"></p>
+            <a sec:authorize="isAuthenticated()" th:href="@{'/posts/edit/' + ${post.id}}" class="card-link">Edit</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{'/posts/delete/' + ${post.id}}" class="card-link">Delete</a>
+        </div>
+        <div class="card-footer"th:each="user : ${post.user}">
+            <p>Created by <span th:text="${user.email}"></span></p>
+        </div>
+    </div>
+
 <div class="card text-white bg-info m-4 text-center">
     <div class="card-header">
         Please login or register
